@@ -7,7 +7,7 @@ pipeline {
   agent any
   environment {
     WORKSPACE = "${env.WORKSPACE}"
-    NEXUS_CREDENTIAL_ID = 'Nexus-Credential'
+    NEXUS_CREDENTIAL_ID = 'Nexus-Credentials'
     SONAR_TOKEN = 'SonarQube-Token'
     //NEXUS_USER = "$NEXUS_CREDS_USR"
     //NEXUS_PASSWORD = "$Nexus-Token"

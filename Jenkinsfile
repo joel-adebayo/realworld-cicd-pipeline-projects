@@ -8,7 +8,7 @@ pipeline {
   environment {
     WORKSPACE = "${env.WORKSPACE}"
     NEXUS_CREDENTIAL_ID = 'Nexus-Credentials'
-    SONAR_TOKEN = 'SonarQube-Token'
+    SONAR_TOKEN = 'sonarQube-token'
     //NEXUS_USER = "$NEXUS_CREDS_USR"
     //NEXUS_PASSWORD = "$Nexus-Token"
     //NEXUS_URL = "172.31.18.62:8081"
@@ -17,8 +17,8 @@ pipeline {
     //ARTVERSION = "${env.BUILD_ID}"
   }
   tools {
-    maven 'localMaven'
-    jdk 'localjdk'
+    maven 'M3'
+    jdk 'localJDK'
   }
   stages {
     stage('Build') {
@@ -58,8 +58,8 @@ pipeline {
                 withCredentials([string(credentialsId: 'SonarQube-Token', variable: 'SONAR_TOKEN')]) {
                 sh """
                 mvn sonar:sonar \
-                -Dsonar.projectKey=cicd-pipeline-project \
-                -Dsonar.host.url=http://172.31.58.152:9000 \
+                -Dsonar.projectKey=maven-java-webapp \
+                -Dsonar.host.url=https://172.31.87.210:9000 \
                 -Dsonar.login=$SONAR_TOKEN
                 """
                 }
@@ -78,7 +78,7 @@ pipeline {
            nexusArtifactUploader(
               nexusVersion: 'nexus3',
               protocol: 'http',
-              nexusUrl: '172.31.56.223:8081',
+              nexusUrl: '172.31.80.65:8081',
               groupId: 'webapp',
               version: "${env.BUILD_ID}-${env.BUILD_TIMESTAMP}",
               repository: 'maven-project-release',  //"${NEXUS_REPOSITORY}",

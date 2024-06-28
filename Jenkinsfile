@@ -55,11 +55,11 @@ pipeline {
     stage('SonarQube Inspection') {
         steps {
             withSonarQubeEnv('SonarQube') { 
-                withCredentials([string(credentialsId: 'sonarQube-token', variable: 'SONAR_TOKEN')]) {
+                withCredentials([string(credentialsId: 'SonarQube-Token', variable: 'SONAR_TOKEN')]) {
                 sh """
                 mvn sonar:sonar \
-                -Dsonar.projectKey=maven-java-webapp \
-                -Dsonar.host.url=http://172.31.87.210:9000 \
+                -Dsonar.projectKey=java-webapp \
+                -Dsonar.host.url=http://172.31.58.250:9000 \
                 -Dsonar.login=$SONAR_TOKEN
                 """
                 }
